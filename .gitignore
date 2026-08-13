@@ -1,0 +1,4 @@
+# Ignore compiled C executables and object files.
+*.exe
+*.out
+*.o
