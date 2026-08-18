@@ -55,7 +55,9 @@ bool solve(int board[9][9]) {
     for (int i = 0; i < 9; i++) {
         if (is_valid(board, i + 1, row, col)) {
             board[row][col] = i + 1;
-            return solve(board);
+            if(solve(board)) {
+                return true;
+            }
             board[row][col] = 0;
         }
     }
