@@ -37,3 +37,42 @@ bool find_empty_cell(int board[9][9], int *row, int *col) {
     }
     return false;
 }
+/* 
+ Main idea:
+ 1. Find an empty slot
+ 2. Check what number is availble at this cell from 1 to 9.
+ 3. The first number available, put it in and keep moving to a new empty cell.
+ 4. repeat until works, if not, backtrack back to the number that didnt work.
+ 5. Keep going, until everything works.
+*/
+bool solve(int board[9][9]) {
+    int row, col;
+    // 1.
+    if (!find_empty_cell(board, &row, &col)) {
+        return true;
+    }
+    // 2.
+    for (int i = 0; i < 9; i++) {
+        if (is_valid(board, i + 1, row, col)) {
+            board[row][col] = i + 1;
+            return solve(board);
+            board[row][col] = 0;
+        }
+    }
+    return false;
+}
+
+void print_board(int board[9][9]) {
+    for (int i = 0; i < 9; i++) {
+        if (i % 3 == 0 && i != 0) {
+            printf("-------------------------------\n");
+        }
+        for (int j = 0; j < 9; j++) {
+            if (j % 3 == 0 && j != 0) {
+                printf("|  ");
+            }
+            printf("%d  ", board[i][j]);
+        }
+        printf("\n");
+    }
+}
