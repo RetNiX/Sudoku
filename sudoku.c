@@ -1,13 +1,13 @@
 #include <stdio.h>
 #include "sudoku.h"
 
-bool is_valid(int curr_board[9][9], int checked_number, int row, int col) {
+bool is_valid(int board[9][9], int checked_number, int row, int col) {
     // Checking if number exits in row and column
     for (int i = 0; i < 9; i++) {
-        if (curr_board[row][i] == checked_number) {
+        if (board[row][i] == checked_number) {
             return false;
         }
-        if (curr_board[i][col] == checked_number) {
+        if (board[i][col] == checked_number) {
             return false;
         }
     }
@@ -17,10 +17,23 @@ bool is_valid(int curr_board[9][9], int checked_number, int row, int col) {
     int start_col = (col / 3) * 3;
     for (int i = start_row; i < start_row + 3; i++) {
         for(int j = start_col; j < start_col + 3; j++) {
-            if (curr_board[i][j] == checked_number) {
+            if (board[i][j] == checked_number) {
                 return false;
             }
         }
     }
     return true;
+}
+
+bool find_empty_cell(int board[9][9], int *row, int *col) {
+    for (int i = 0; i < 9; i++) {
+        for (int j = 0; j < 9; j++) {
+            if (board[i][j] == 0) {
+                *row = i;
+                *col = j;
+                return true;
+            }
+        }
+    }
+    return false;
 }
