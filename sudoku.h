@@ -11,3 +11,6 @@ bool solve(int board[9][9]);
 
 // Print Board
 void print_board(int board[9][9]);
+
+// shuffle algorith for sudoku generator
+void shuffle(int arr[], int size);

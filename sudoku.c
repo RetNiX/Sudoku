@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include "sudoku.h"
+#include <stdlib.h>
+#include <time.h>
 
 bool is_valid(int board[9][9], int checked_number, int row, int col) {
     // Checking if number exits in row and column
@@ -47,14 +49,19 @@ bool find_empty_cell(int board[9][9], int *row, int *col) {
 */
 bool solve(int board[9][9]) {
     int row, col;
-    // 1.
+    // #1
     if (!find_empty_cell(board, &row, &col)) {
         return true;
     }
-    // 2.
+    // Creating random array of choice numbers
+    int num_range[] = {1,2,3,4,5,6,7,8,9};
+    int arr_size = sizeof(num_range) / sizeof(num_range[0]);
+    shuffle (num_range, arr_size);
+
+    // #2
     for (int i = 0; i < 9; i++) {
-        if (is_valid(board, i + 1, row, col)) {
-            board[row][col] = i + 1;
+        if (is_valid(board, num_range[i], row, col)) {
+            board[row][col] = num_range[i];
             if(solve(board)) {
                 return true;
             }
@@ -76,5 +83,15 @@ void print_board(int board[9][9]) {
             printf("%d  ", board[i][j]);
         }
         printf("\n");
+    }
+}
+
+void shuffle(int arr[], int size) {
+    for (int i = size - 1; i > 0; i--) {
+        int j = rand() % (i + 1);
+
+        int tmp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = tmp;
     }
 }

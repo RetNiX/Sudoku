@@ -1,8 +1,11 @@
 #include <stdio.h>
 #include "sudoku.h"
 #include "sudoku.c"
+#include <stdlib.h>
+#include <time.h>
 
 int main() {
+    srand((unsigned int)time(NULL));
     int board[9][9] = {
         {9, 0, 0, 5, 0, 8, 0, 0, 7},
         {0, 8, 0, 3, 0, 2, 9, 0, 5},
@@ -16,7 +19,20 @@ int main() {
         {7, 2, 6, 0, 0, 1, 0, 4, 0},
         {0, 0, 1, 4, 7, 0, 0, 5, 6}
     };
-    solve(board);
-    print_board(board);
+    int empty_board[9][9] = {
+        {0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0},
+
+        {0, 0, 0, 0, 0, 0, 0 ,0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0},
+
+        {0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0}
+    };
+    solve(empty_board);
+    print_board(empty_board);
     return 0;
 }
