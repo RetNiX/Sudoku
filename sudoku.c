@@ -100,9 +100,11 @@ void punch_holes(int board[9][9], int total_punch_holes) {
     int rand_row, rand_col, curr_punched_holes = 0;
     
     while(curr_punched_holes < total_punch_holes) {
-        rand_row = (rand() % 9) + 1;
-        rand_col = (rand() % 9) + 1;
-        board[rand_row][rand_col] = 0;
-        curr_punched_holes++;
+        rand_row = (rand() % 9);
+        rand_col = (rand() % 9);
+        if (board[rand_row][rand_col] != 0){
+            board[rand_row][rand_col] = 0;
+            curr_punched_holes++;
+        }    
     }
 }
