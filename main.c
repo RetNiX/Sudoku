@@ -34,5 +34,8 @@ int main() {
     };
     solve(empty_board);
     print_board(empty_board);
+    printf("The new generatated sudoku: \n\n");
+    punch_holes(empty_board, 42);
+    print_board(empty_board);
     return 0;
 }
