@@ -17,3 +17,6 @@ void shuffle(int arr[], int size);
 
 // Punch holes into a solved sudoku
 void punch_holes(int board[9][9], int total_punch_holes);
+
+// Main Sudoku Generating Function
+void generate_puzzle();
