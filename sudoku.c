@@ -3,6 +3,14 @@
 #include <stdlib.h>
 #include <time.h>
 
+// Making the difficulties as a type.
+typedef enum {
+    EASY,
+    MEDIUM,
+    HARD,
+    EXTREME
+} Difficulty;
+
 bool is_valid(int board[9][9], int checked_number, int row, int col) {
     // Checking if number exits in row and column
     for (int i = 0; i < 9; i++) {
@@ -107,4 +115,21 @@ void punch_holes(int board[9][9], int total_punch_holes) {
             curr_punched_holes++;
         }    
     }
+}
+
+void generate_puzzle(int board[9][9], Difficulty choice) {
+    /*
+        1. Solve the provided board.
+        2. Punch holes in the board depending on the difficulty.
+        3. Print the board.
+
+        Difficulty punched holes: (At least 17 empty cells should be remaining.)
+            EASY = 30 - 39
+            MEDIUM = 40 - 49
+            HARD = 50 - 57
+            EXTREME = 58 - 64
+    */
+   if (solve(board)) {
+        
+   }
 }

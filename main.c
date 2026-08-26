@@ -19,23 +19,13 @@ int main() {
         {7, 2, 6, 0, 0, 1, 0, 4, 0},
         {0, 0, 1, 4, 7, 0, 0, 5, 6}
     };
-    int empty_board[9][9] = {
-        {0, 0, 0, 0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0, 0, 0, 0},
+    int empty_board[9][9] = {0};
 
-        {0, 0, 0, 0, 0, 0, 0 ,0, 0},
-        {0, 0, 0, 0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0, 0, 0, 0},
-
-        {0, 0, 0, 0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0, 0, 0, 0}
-    };
     solve(empty_board);
     print_board(empty_board);
     printf("The new generatated sudoku: \n\n");
     punch_holes(empty_board, 42);
     print_board(empty_board);
+    
     return 0;
 }
