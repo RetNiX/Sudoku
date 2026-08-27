@@ -20,12 +20,6 @@ int main() {
         {0, 0, 1, 4, 7, 0, 0, 5, 6}
     };
     int empty_board[9][9] = {0};
-
-    solve(empty_board);
-    print_board(empty_board);
-    printf("The new generatated sudoku: \n\n");
-    punch_holes(empty_board, 42);
-    print_board(empty_board);
-    
+    generate_puzzle(empty_board,EASY);
     return 0;
 }

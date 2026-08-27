@@ -3,13 +3,6 @@
 #include <stdlib.h>
 #include <time.h>
 
-// Making the difficulties as a type.
-typedef enum {
-    EASY,
-    MEDIUM,
-    HARD,
-    EXTREME
-} Difficulty;
 
 bool is_valid(int board[9][9], int checked_number, int row, int col) {
     // Checking if number exits in row and column
@@ -130,6 +123,23 @@ void generate_puzzle(int board[9][9], Difficulty choice) {
             EXTREME = 58 - 64
     */
    if (solve(board)) {
-        
+        switch(choice) {
+            case EASY:
+                punch_holes(board, (rand() % 10) + 30);
+                break;
+            case MEDIUM:
+                punch_holes(board, (rand() % 10) + 40);
+                break;
+            case HARD:
+                punch_holes(board, (rand() % 8) + 50);
+                break;
+            case EXTREME:
+                punch_holes(board, (rand() % 7) + 58);
+                break;
+            default:
+                // Default: just make it super easy
+                punch_holes(board, (rand() % 10) + 25);
+        }
+        print_board(board);
    }
 }

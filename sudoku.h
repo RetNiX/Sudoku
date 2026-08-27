@@ -1,5 +1,13 @@
 #include <stdbool.h>
 
+// Making the difficulties as a type.
+typedef enum {
+    EASY,
+    MEDIUM,
+    HARD,
+    EXTREME
+} Difficulty;
+
 // Checking if a number is valid to put in the cell, according to the sudoku rules.
 bool is_valid(int board[9][9], int checked_number, int row, int col);
 
