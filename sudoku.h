@@ -1,3 +1,5 @@
+#pragma once // Safegaurding for the typedef problem
+
 #include <stdbool.h>
 
 // Making the difficulties as a type.
