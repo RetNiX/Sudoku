@@ -1,8 +1,7 @@
 #include <stdio.h>
-#include "sudoku.h"
 #include <stdlib.h>
 #include <time.h>
-
+#include "sudoku.h"
 
 bool is_valid(int board[9][9], int checked_number, int row, int col) {
     // Checking if number exits in row and column
