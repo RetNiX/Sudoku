@@ -61,7 +61,7 @@ int main() {
                 DrawLineEx((Vector2){offSetX, offSetY + i * cellHeight}, (Vector2){cellHeight * 10, offSetY + i * cellHeight}, 3.0f, BLACK);
             }
         }
-        DrawText("4", 65, 60, 35, BLACK);
+        DrawTexture(permNumbers[0], 65, 60, WHITE);
         EndDrawing();
     }
     CloseWindow();
