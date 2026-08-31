@@ -22,7 +22,25 @@ int main() {
 
     // Vector for line thickness for 3x3 squares
     (Vector2){50.0f, 100.0f};
-    
+    // Creating the images for the numbers
+    const char *imagePaths[10] = {
+        "",
+        "images/OnePerm.png",
+        "images/TwoPerm.png",
+        "images/ThreePerm.png",
+        "images/FourPerm.png",
+        "images/FivePerm.png",
+        "images/SixPerm.png",
+        "images/SevenPerm.png",
+        "images/EightPerm.png",
+        "images/NinePerm.png"
+        
+    };
+    Texture2D permNumbers[10];
+    // Loading the images of the number to the GPU
+    for (int i = 1; i <= 9; i++) {
+        permNumbers[i] = LoadTexture(imagePaths[i]);
+    }
     // Game loop
     while(!WindowShouldClose()) {
         BeginDrawing();
@@ -43,7 +61,7 @@ int main() {
                 DrawLineEx((Vector2){offSetX, offSetY + i * cellHeight}, (Vector2){cellHeight * 10, offSetY + i * cellHeight}, 3.0f, BLACK);
             }
         }
-
+        DrawText("4", 65, 60, 35, BLACK);
         EndDrawing();
     }
     CloseWindow();
