@@ -10,7 +10,7 @@ int main() {
     // Generating the Sudoku
     int empty_board[9][9] = {0};
     int answer_board[9][9] = {0};
-    generate_puzzle(empty_board, answer_board, EASY);
+    generate_puzzle(empty_board, answer_board, EXTREME);
 
     // Main Game Logic
     InitWindow(800, 600, "Hello raylib");
