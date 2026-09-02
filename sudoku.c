@@ -109,7 +109,7 @@ void punch_holes(int board[9][9], int total_punch_holes) {
     }
 }
 
-void generate_puzzle(int board[9][9], Difficulty choice) {
+void generate_puzzle(int generated_board[9][9], int solved_board[9][9], Difficulty choice) {
     /*
         1. Solve the provided board.
         2. Punch holes in the board depending on the difficulty.
@@ -121,24 +121,30 @@ void generate_puzzle(int board[9][9], Difficulty choice) {
             HARD = 50 - 57
             EXTREME = 58 - 64
     */
-   if (solve(board)) {
+   if (solve(generated_board)) {
+        // Save the solved matrix to know the user's guesses
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                solved_board[i][j] = generated_board[i][j];
+            }
+        }
         switch(choice) {
             case EASY:
-                punch_holes(board, (rand() % 10) + 30);
+                punch_holes(generated_board, (rand() % 10) + 30);
                 break;
             case MEDIUM:
-                punch_holes(board, (rand() % 10) + 40);
+                punch_holes(generated_board, (rand() % 10) + 40);
                 break;
             case HARD:
-                punch_holes(board, (rand() % 8) + 50);
+                punch_holes(generated_board, (rand() % 8) + 50);
                 break;
             case EXTREME:
-                punch_holes(board, (rand() % 7) + 58);
+                punch_holes(generated_board, (rand() % 7) + 58);
                 break;
             default:
                 // Default: just make it super easy
-                punch_holes(board, (rand() % 10) + 25);
+                punch_holes(generated_board, (rand() % 10) + 25);
         }
-        print_board(board);
+        print_board(generated_board);
    }
 }

@@ -9,7 +9,8 @@ int main() {
     srand((unsigned int)time(NULL));
     // Generating the Sudoku
     int empty_board[9][9] = {0};
-    generate_puzzle(empty_board,EASY);
+    int answer_board[9][9] = {0};
+    generate_puzzle(empty_board, answer_board, EASY);
 
     // Main Game Logic
     InitWindow(800, 600, "Hello raylib");
@@ -22,25 +23,8 @@ int main() {
 
     // Vector for line thickness for 3x3 squares
     (Vector2){50.0f, 100.0f};
-    // Creating the images for the numbers
-    const char *imagePaths[10] = {
-        "",
-        "images/OnePerm.png",
-        "images/TwoPerm.png",
-        "images/ThreePerm.png",
-        "images/FourPerm.png",
-        "images/FivePerm.png",
-        "images/SixPerm.png",
-        "images/SevenPerm.png",
-        "images/EightPerm.png",
-        "images/NinePerm.png"
-        
-    };
-    Texture2D permNumbers[10];
-    // Loading the images of the number to the GPU
-    for (int i = 1; i <= 9; i++) {
-        permNumbers[i] = LoadTexture(imagePaths[i]);
-    }
+    // Creating the images for the numbersW
+
     // Game loop
     while(!WindowShouldClose()) {
         BeginDrawing();
@@ -61,7 +45,18 @@ int main() {
                 DrawLineEx((Vector2){offSetX, offSetY + i * cellHeight}, (Vector2){cellHeight * 10, offSetY + i * cellHeight}, 3.0f, BLACK);
             }
         }
-        DrawTexture(permNumbers[0], 65, 60, WHITE);
+        // Draw the permenant numbers
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                if(empty_board[i][j] != 0) {
+                    DrawText(TextFormat("%d", empty_board[i][j]), 65 + j*50, 56 + i*50, 40, BLACK);
+                }
+            }
+        }
+        // DrawText(TextFormat("%d", empty_board[4][8]),65 + 8*50 ,56, 40, BLACK);
+        // DrawText("9",65 + 2*25 ,56, 40, BLACK);
+        // DrawText("4",65,56 + 2*25, 40, BLACK);
+        // DrawText("9",65 + 2*25,56 + 2*25, 40, BLACK);
         EndDrawing();
     }
     CloseWindow();
