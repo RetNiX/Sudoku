@@ -3,9 +3,9 @@
 #include <time.h>
 #include "sudoku.h"
 
-bool is_valid(int board[9][9], int checked_number, int row, int col) {
+bool is_valid(int board[GRID_SIZE][GRID_SIZE], int checked_number, int row, int col) {
     // Checking if number exits in row and column
-    for (int i = 0; i < 9; i++) {
+    for (int i = 0; i < GRID_SIZE; i++) {
         if (board[row][i] == checked_number) {
             return false;
         }
@@ -27,9 +27,9 @@ bool is_valid(int board[9][9], int checked_number, int row, int col) {
     return true;
 }
 
-bool find_empty_cell(int board[9][9], int *row, int *col) {
-    for (int i = 0; i < 9; i++) {
-        for (int j = 0; j < 9; j++) {
+bool find_empty_cell(int board[GRID_SIZE][GRID_SIZE], int *row, int *col) {
+    for (int i = 0; i < GRID_SIZE; i++) {
+        for (int j = 0; j < GRID_SIZE; j++) {
             if (board[i][j] == 0) {
                 *row = i;
                 *col = j;
@@ -47,7 +47,7 @@ bool find_empty_cell(int board[9][9], int *row, int *col) {
  4. repeat until works, if not, backtrack back to the number that didnt work.
  5. Keep going, until everything works.
 */
-bool solve(int board[9][9]) {
+bool solve(int board[GRID_SIZE][GRID_SIZE]) {
     int row, col;
     // #1
     if (!find_empty_cell(board, &row, &col)) {
@@ -71,12 +71,12 @@ bool solve(int board[9][9]) {
     return false;
 }
 
-void print_board(int board[9][9]) {
-    for (int i = 0; i < 9; i++) {
+void print_board(int board[GRID_SIZE][GRID_SIZE]) {
+    for (int i = 0; i < GRID_SIZE; i++) {
         if (i % 3 == 0 && i != 0) {
             printf("-------------------------------\n");
         }
-        for (int j = 0; j < 9; j++) {
+        for (int j = 0; j < GRID_SIZE; j++) {
             if (j % 3 == 0 && j != 0) {
                 printf("|  ");
             }
@@ -96,7 +96,7 @@ void shuffle(int arr[], int size) {
     }
 }
 
-void punch_holes(int board[9][9], int total_punch_holes) {
+void punch_holes(int board[GRID_SIZE][GRID_SIZE], int total_punch_holes) {
     int rand_row, rand_col, curr_punched_holes = 0;
     
     while(curr_punched_holes < total_punch_holes) {
@@ -109,7 +109,7 @@ void punch_holes(int board[9][9], int total_punch_holes) {
     }
 }
 
-void generate_puzzle(int generated_board[9][9], int solved_board[9][9], Difficulty choice) {
+void generate_puzzle(int generated_board[GRID_SIZE][GRID_SIZE], int solved_board[GRID_SIZE][GRID_SIZE], Difficulty choice) {
     /*
         1. Solve the provided board.
         2. Punch holes in the board depending on the difficulty.
@@ -123,8 +123,8 @@ void generate_puzzle(int generated_board[9][9], int solved_board[9][9], Difficul
     */
    if (solve(generated_board)) {
         // Save the solved matrix to know the user's guesses
-        for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < 9; j++) {
+        for (int i = 0; i < GRID_SIZE; i++) {
+            for (int j = 0; j < GRID_SIZE; j++) {
                 solved_board[i][j] = generated_board[i][j];
             }
         }

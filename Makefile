@@ -1,2 +1,2 @@
 sudoku: main.c
-	gcc main.c -o sudoku
+	gcc main.c sudoku.c -lraylib -o sudoku
