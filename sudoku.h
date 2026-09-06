@@ -13,14 +13,11 @@ typedef enum {
     EXTREME
 } Difficulty;
 
-// Checking if a number is valid to put in the cell, according to the sudoku rules.
-bool is_valid(int board[GRID_SIZE][GRID_SIZE], int checked_number, int row, int col);
-
 // Find an empty cell.
 bool find_empty_cell(int board[GRID_SIZE][GRID_SIZE], int *row, int *col);
 
 // Main solver function. Using backtracking algorithm
-bool solve(int board[GRID_SIZE][GRID_SIZE]);
+bool solve(int board[GRID_SIZE][GRID_SIZE], int row_mask[], int col_mask[], int box_mask[]);
 
 // Print Board
 void print_board(int board[GRID_SIZE][GRID_SIZE]);
