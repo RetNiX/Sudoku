@@ -18,7 +18,7 @@ int main() {
     // Vector for line thickness for 3x3 squares
     (Vector2){50.0f, 100.0f};
 
-    int selected_cell[2] ={1, 4};
+    int selected_cell[2] ={-2,-2};
 
     // Game loop
     while(!WindowShouldClose()) {
@@ -40,6 +40,9 @@ int main() {
                 DrawLineEx((Vector2){OFFSET, OFFSET + i * CELL_SIZE}, (Vector2){CELL_SIZE * 10, OFFSET + i * CELL_SIZE}, 3.0f, BLACK);
             }
         }
+        
+        DrawRectangle(OFFSET + CELL_SIZE * selected_cell[1], OFFSET + CELL_SIZE * selected_cell[0],CELL_SIZE - 1, CELL_SIZE - 1, SKYBLUE);
+
         // Draw the permenant numbers
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
@@ -55,11 +58,15 @@ int main() {
                 && !(mouse_X < OFFSET) && !(mouse_Y < OFFSET)){
                 int clicked_col = (mouse_X - OFFSET) / CELL_SIZE;
                 int clicked_row = (mouse_Y - OFFSET) / CELL_SIZE;
-                selected_cell[1] = clicked_col;
-                selected_cell[0] = clicked_row;
+                if (clicked_col == selected_cell[1] && clicked_row == selected_cell[0]){
+                    selected_cell[1] = -2;
+                    selected_cell[0] = -2;
+                } else {
+                    selected_cell[1] = clicked_col;
+                    selected_cell[0] = clicked_row;
+                }
             }
         }
-        DrawRectangle(OFFSET + CELL_SIZE * selected_cell[1], OFFSET + CELL_SIZE * selected_cell[0],CELL_SIZE - 1, CELL_SIZE - 1, SKYBLUE);
         EndDrawing();
     }
     CloseWindow(); 
