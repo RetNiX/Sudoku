@@ -10,6 +10,7 @@ int main() {
     // Generating the Sudoku
     int empty_board[9][9] = {0};
     int answer_board[9][9] = {0}; // For comparing the user's choice
+    int user_board[9][9] = {0}; // User's typed numbers
     generate_puzzle(empty_board, answer_board, EXTREME);
 
     // # ============ Main Game Logic ============ #
@@ -19,9 +20,11 @@ int main() {
     (Vector2){50.0f, 100.0f};
 
     int selected_cell[2] ={-2,-2};
-
+    // int check = GetKeyPressed();
+    // printf(" The delete ascii: %d", check);
     // Game loop
     while(!WindowShouldClose()) {
+        int key_pressed = GetKeyPressed();
         BeginDrawing();
 
         ClearBackground(WHITE);
@@ -49,8 +52,12 @@ int main() {
                 if(empty_board[i][j] != 0) {
                     DrawText(TextFormat("%d", empty_board[i][j]), (OFFSET + 15) + j * OFFSET, (OFFSET + 6) + i * OFFSET, 40, BLACK);
                 }
+                if (user_board[i][j] != 0 && empty_board[i][j] == 0) {
+                    DrawText(TextFormat("%d", user_board[i][j]), (OFFSET + 15) + j * OFFSET, (OFFSET + 6) + i * OFFSET, 40, BLUE);
+                }
             }
         }
+        // Cell selecting logic
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
             int mouse_X = GetMouseX();
             int mouse_Y = GetMouseY();
@@ -67,6 +74,19 @@ int main() {
                 }
             }
         }
+        // User's number inserted - numbers from 1 to 9
+        if (key_pressed > 48 && key_pressed <= 57) {
+            if (selected_cell[0] >= 0 && selected_cell[1] >= 0) {
+                user_board[selected_cell[0]][selected_cell[1]] = key_pressed - 48;
+            }
+        }
+        // Delete key - Deletes user's number.
+        if (IsKeyPressed(KEY_DELETE)) {
+            if (selected_cell[0] >= 0 && selected_cell[1] >= 0) {
+                user_board[selected_cell[0]][selected_cell[1]] = 0;
+            }
+        }
+        
         EndDrawing();
     }
     CloseWindow(); 
