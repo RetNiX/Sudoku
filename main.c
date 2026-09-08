@@ -12,9 +12,9 @@ int main() {
     int answer_board[9][9] = {0}; // For comparing the user's choice
     int user_board[9][9] = {0}; // User's typed numbers
     generate_puzzle(empty_board, answer_board, EXTREME);
-
+    
     // # ============ Main Game Logic ============ #
-    InitWindow(800, 600, "Hello raylib");
+    InitWindow(1000, 600, "Hello raylib");
 
     // Vector for line thickness for 3x3 squares
     (Vector2){50.0f, 100.0f};
@@ -22,7 +22,7 @@ int main() {
     int selected_cell[2] ={-2,-2};
     // int check = GetKeyPressed();
     // printf(" The delete ascii: %d", check);
-    // Game loop
+    // # ============ Game Loop ============ #
     while(!WindowShouldClose()) {
         int key_pressed = GetKeyPressed();
         BeginDrawing();
@@ -44,19 +44,54 @@ int main() {
             }
         }
         
-        DrawRectangle(OFFSET + CELL_SIZE * selected_cell[1], OFFSET + CELL_SIZE * selected_cell[0],CELL_SIZE - 1, CELL_SIZE - 1, SKYBLUE);
+        DrawRectangle(OFFSET + CELL_SIZE * selected_cell[1], OFFSET + CELL_SIZE * selected_cell[0],CELL_SIZE - 1, CELL_SIZE - 1, Fade(BLUE, 0.3f));
+        // Drawing the Difficulty choice and buttons
+        DrawText("Difficulty:" , OFFSET + 9 * CELL_SIZE + 20, OFFSET, 20, Fade(GRAY, 0.8f));
+        // Easy Button Draw
+        DrawRectangle(630, OFFSET, 50, 23, Fade(ORANGE, 0.5f));
+        DrawText("Easy", 630, OFFSET, 20 ,BLACK);
+        // Medium Button Draw
+        DrawRectangle(690, OFFSET, 70, 23, Fade(ORANGE, 0.5f));
+        DrawText("Medium", 690, OFFSET, 20 ,BLACK);
+        // Hard Button Draw
+        DrawRectangle(770, OFFSET, 50, 23, Fade(ORANGE, 0.5f));
+        DrawText("Hard", 770, OFFSET, 20 ,BLACK);
+        // Extreme Button Draw
+        DrawRectangle(830, OFFSET, 85, 23, Fade(ORANGE, 0.5f));
+        DrawText("Extreme", 830, OFFSET, 20 ,BLACK);
+
+        // #====== Difficulty Button Logic
+        // EASY Button Press
+        if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && (GetMouseX() >= 630) && (GetMouseX() <= 680) && (GetMouseY() >= OFFSET) && (GetMouseY() <= 73)){
+            generate_puzzle(empty_board,answer_board, EASY);
+        }
+        // MEDIUM Button Press
+        if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && (GetMouseX() >= 690) && (GetMouseX() <= 760) && (GetMouseY() >= OFFSET) && (GetMouseY() <= 73)){
+            generate_puzzle(empty_board,answer_board, MEDIUM);
+        }
+        // Hard Button Press
+        if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && (GetMouseX() >= 770) && (GetMouseX() <= 820) && (GetMouseY() >= OFFSET) && (GetMouseY() <= 73)){
+            generate_puzzle(empty_board,answer_board, HARD);
+        }
+        // Extreme Button Press
+        if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && (GetMouseX() >= 830) && (GetMouseX() <= 915) && (GetMouseY() >= OFFSET) && (GetMouseY() <= 73)){
+            generate_puzzle(empty_board,answer_board, EXTREME);
+        }
 
         // Draw the permenant numbers
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
+                // Draw the permanent sudoku numbers
                 if(empty_board[i][j] != 0) {
                     DrawText(TextFormat("%d", empty_board[i][j]), (OFFSET + 15) + j * OFFSET, (OFFSET + 6) + i * OFFSET, 40, BLACK);
                 }
+                // Draw user's numbers
                 if (user_board[i][j] != 0 && empty_board[i][j] == 0) {
                     if (check_user_choice(empty_board, user_board, i, j)) {
-                        DrawText(TextFormat("%d", user_board[i][j]), (OFFSET + 15) + j * OFFSET, (OFFSET + 6) + i * OFFSET, 40, BLUE);
+                        DrawText(TextFormat("%d", user_board[i][j]), (OFFSET + 15) + j * OFFSET, (OFFSET + 6) + i * OFFSET, 40, BLUE); // Draw user's numbers in blue
+                        
                     } else {
-                        DrawText(TextFormat("%d", user_board[i][j]), (OFFSET + 15) + j * OFFSET, (OFFSET + 6) + i * OFFSET, 40, RED);
+                        DrawText(TextFormat("%d", user_board[i][j]), (OFFSET + 15) + j * OFFSET, (OFFSET + 6) + i * OFFSET, 40, RED); // Draw invalid user's numbers in red
                     }
                 }
             }
