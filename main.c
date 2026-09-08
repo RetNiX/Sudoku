@@ -53,7 +53,11 @@ int main() {
                     DrawText(TextFormat("%d", empty_board[i][j]), (OFFSET + 15) + j * OFFSET, (OFFSET + 6) + i * OFFSET, 40, BLACK);
                 }
                 if (user_board[i][j] != 0 && empty_board[i][j] == 0) {
-                    DrawText(TextFormat("%d", user_board[i][j]), (OFFSET + 15) + j * OFFSET, (OFFSET + 6) + i * OFFSET, 40, BLUE);
+                    if (check_user_choice(empty_board, user_board, i, j)) {
+                        DrawText(TextFormat("%d", user_board[i][j]), (OFFSET + 15) + j * OFFSET, (OFFSET + 6) + i * OFFSET, 40, BLUE);
+                    } else {
+                        DrawText(TextFormat("%d", user_board[i][j]), (OFFSET + 15) + j * OFFSET, (OFFSET + 6) + i * OFFSET, 40, RED);
+                    }
                 }
             }
         }

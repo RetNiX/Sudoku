@@ -30,3 +30,6 @@ void punch_holes(int board[GRID_SIZE][GRID_SIZE], int total_punch_holes);
 
 // Main Sudoku Generating Function
 void generate_puzzle(int generated_board[GRID_SIZE][GRID_SIZE], int solved_baord[GRID_SIZE][GRID_SIZE], Difficulty choice);
+
+// Check if user's choice is valid without hint
+bool check_user_choice(int board[GRID_SIZE][GRID_SIZE], int user_board[GRID_SIZE][GRID_SIZE], int row, int col);

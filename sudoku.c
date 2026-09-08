@@ -144,3 +144,44 @@ void generate_puzzle(int generated_board[GRID_SIZE][GRID_SIZE], int solved_board
         print_board(generated_board);
    }
 }
+
+bool check_user_choice(int board[GRID_SIZE][GRID_SIZE], int user_board[GRID_SIZE][GRID_SIZE], int row, int col) {
+    int user_number = user_board[row][col];
+    int valid_flag = 0;
+    // Check if exists in the row
+    for(int i = 0; i < GRID_SIZE; i++) {
+        if (i != col) {
+            if (user_number != user_board[row][i] && user_number != board[row][i]) {
+                valid_flag = 1;
+            } else {
+                return false;
+            }
+        }
+    }
+    // Check if exists in the coloumn
+    for(int i = 0; i < GRID_SIZE; i++) {
+        if (i != row) {
+            if (user_number != user_board[i][col] && user_number != board[i][col]) {
+                valid_flag = 1;
+            } else {
+                return false;
+            }
+        }
+    }
+    // Check if exists in the 3x3 box
+    int start_row = (row / 3) * 3;
+    int start_col = (col / 3) * 3;
+    for(int i = start_row; i < start_row + 3; i++) {
+        for(int j = start_col; j < start_col + 3; j++) {
+            if ((i != row) || (j != col)) {
+                if (user_number != user_board[i][j] && user_number != board[i][j]) {
+                    valid_flag = 1;
+                } else {
+                    return false;
+                }
+            }
+        }
+    }
+    if (valid_flag == true) return true;
+    else return false;
+}
