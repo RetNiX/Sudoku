@@ -12,7 +12,15 @@ int main() {
     int answer_board[9][9] = {0}; // For comparing the user's choice
     int user_board[9][9] = {0}; // User's typed numbers
     generate_puzzle(empty_board, answer_board, EXTREME);
-    
+    printf("The generated board: \n");
+    print_board(empty_board);
+    printf("The answer/solution board: \n");
+    print_board(answer_board);
+    generate_puzzle(empty_board, answer_board, EXTREME);
+    printf("The generated board: \n");
+    print_board(empty_board);
+    printf("The answer/solution board: \n");
+    print_board(answer_board);
     // # ============ Main Game Logic ============ #
     InitWindow(1000, 600, "Hello raylib");
 

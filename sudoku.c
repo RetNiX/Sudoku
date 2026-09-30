@@ -141,7 +141,6 @@ void generate_puzzle(int generated_board[GRID_SIZE][GRID_SIZE], int solved_board
                 // Default: just make it super easy
                 punch_holes(generated_board, (rand() % 10) + 25);
         }
-        print_board(generated_board);
    }
 }
 
