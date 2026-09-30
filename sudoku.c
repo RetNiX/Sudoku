@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include "sudoku.h"
+#include <string.h>
 
 bool find_empty_cell(int board[GRID_SIZE][GRID_SIZE], int *row, int *col) {
     for (int i = 0; i < GRID_SIZE; i++) {
@@ -117,6 +118,9 @@ void generate_puzzle(int generated_board[GRID_SIZE][GRID_SIZE], int solved_board
     int row_mask[GRID_SIZE] = {0};
     int col_mask[GRID_SIZE] = {0};
     int box_mask[GRID_SIZE] = {0};
+    // reset generated_board
+    memset(generated_board, 0, GRID_SIZE * GRID_SIZE * sizeof(int));
+
    if (solve(generated_board, row_mask, col_mask, box_mask)) {
         // Save the solved matrix to know the user's guesses
         for (int i = 0; i < GRID_SIZE; i++) {
@@ -181,6 +185,6 @@ bool check_user_choice(int board[GRID_SIZE][GRID_SIZE], int user_board[GRID_SIZE
             }
         }
     }
-    if (valid_flag == true) return true;
+    if (valid_flag == 1) return true;
     else return false;
 }

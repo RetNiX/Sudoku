@@ -5,14 +5,15 @@
 ---
 
 ## Step 0: Fix bugs and setup
-- [ ] **New puzzle gets broken:** `generate_puzzle` doesn't clear the old board first, so the new "solution" can have duplicates. → Zero the board at the start.
-- [ ] **Old numbers stay:** a new puzzle doesn't clear `user_board` or `selected_cell`.
-- [ ] **Out of bounds:** clicking exactly on the right/bottom edge (x or y = 500) gives row/col = 9 and writes outside the array. → Use `<` instead of `<=` ([main.c:103](main.c#L103)).
-- [ ] **Given cells can be typed into:** block input if the puzzle already has a number there.
-- [ ] **Mixed constants:** numbers are drawn with `j * OFFSET` instead of `j * CELL_SIZE` ([main.c:86](main.c#L86)).
-- [ ] **Leftovers:** remove the useless `(Vector2){50.0f, 100.0f};` line and the commented-out code.
-- [ ] **Magic numbers:** use `KEY_ONE`…`KEY_NINE` instead of `48`/`57`, and also accept Backspace.
-- [ ] **Binary in git:** add `sudoku` to `.gitignore` and run `git rm --cached sudoku`.
+- [V] **New puzzle gets broken:** `generate_puzzle` doesn't clear the old board first, so the new "solution" can have duplicates. -> Zeroed the board at the start using memset.
+- [V] **Old numbers stay:** a new puzzle doesn't clear `user_board` or `selected_cell`. -> Fixing `generate_puzzle`, solved this aswell.
+- [V] **Out of bounds:** clicking exactly on the thick right side edge (x or y = 500) gives row/col = 9 and writes outside the array. -> Fix by setting the mouse selection to be stric the size of the board.
+- [V] **Given cells can be typed into:** block input if the puzzle already has a number there. Happens in the `user_board`. -> Blocked with a simple && statment in the user's number drawing.
+- [V] **Mixed constants:** numbers are drawn with `j * OFFSET` instead of `j * CELL_SIZE`. -> Replaced to the correct ones.
+- [V] **Able to select permanent board's numbers** user is able to click on the board's initial number. -> Disabled user's ability to click on the board's numbers.
+- [V] **Leftovers:** remove the useless `(Vector2){50.0f, 100.0f};` line and the commented-out code.
+- [V] **Magic numbers:** use `KEY_ONE`…`KEY_NINE` instead of `48`/`57`, and also accept Backspace.
+- [V] **Binary in git:** add `sudoku` to `.gitignore` and run `git rm --cached sudoku`.
 - [ ] **Makefile:** add `sudoku.c`/`sudoku.h` as dependencies, add `-Wall -Wextra`, and add `clean` and `run` targets.
 
 ✅ Done when: it builds with 0 warnings and switching difficulty always gives a valid board.
